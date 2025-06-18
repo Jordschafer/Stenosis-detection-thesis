@@ -1,0 +1,1 @@
+<evaluation><True_Positives>75</True_Positives><False_Positives>200</False_Positives><False_Negatives>853</False_Negatives><Precision>0.2727272727272727</Precision><Recall>0.08081896551724138</Recall><F1-score>0.12468827930174564</F1-score><Mean_IoU>0.6038825209935507</Mean_IoU></evaluation>
