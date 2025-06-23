@@ -51,12 +51,12 @@ def get_package_versions(packages):
     return versions
 
 def main(project_dir):
-    print(f"📂 Scanning Python project in: {project_dir}")
+    print(f" Scanning Python project in: {project_dir}")
     imports = collect_all_imports(project_dir)
     versions = get_package_versions(imports)
 
-    print(f"\n🧠 Python version: {sys.version.split()[0]}\n")
-    print("📦 Detected libraries and versions:\n")
+    print(f"\n Python version: {sys.version.split()[0]}\n")
+    print(" Detected libraries and versions:\n")
     for pkg in sorted(versions):
         print(f"• {pkg} (version {versions[pkg]})")
     with open("requirements_detected.txt", "w") as f:
@@ -64,7 +64,7 @@ def main(project_dir):
         for pkg in sorted(versions):
             if versions[pkg] != "Not installed":
                 f.write(f"{pkg}=={versions[pkg]}\n")
-    print("\n📄 Saved to requirements_detected.txt (only installed packages)")
+    print("\n Saved to requirements_detected.txt (only installed packages)")
     
 
 if __name__ == "__main__":
