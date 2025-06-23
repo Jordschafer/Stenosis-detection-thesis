@@ -16,7 +16,7 @@ models = {
 pca_dir = "logs/patient_signals"
 
 def process_model(model_name, track_dir):
-    print(f"\n📊 Processing {model_name}")
+    print(f"\n Processing {model_name}")
     pca_ffts = []
     track_ffts = []
 
