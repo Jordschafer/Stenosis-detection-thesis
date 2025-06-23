@@ -91,4 +91,4 @@ for model in models:
 
 df = pd.DataFrame(all_results)
 df.to_csv(output_csv, index=False)
-print(f"\n✅ Results saved to {output_csv}")
+print(f"\n Results saved to {output_csv}")
