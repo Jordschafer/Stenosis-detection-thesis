@@ -34,7 +34,7 @@ for pid in sorted(set(patients)):
         track_norm = (track - np.mean(track)) / np.std(track)
 
         if np.std(pca) == 0 or np.std(track) == 0:
-            print(f"[!] Skipped {pid}: constant signal")
+            print(f" Skipped {pid}: constant signal")
             continue
 
         pearson_corr, _ = pearsonr(pca_norm, track_norm)
@@ -55,8 +55,8 @@ for pid in sorted(set(patients)):
             "track_snr": round(track_snr, 2)
         })
     except Exception as e:
-        print(f"[!] Failed on patient {pid}: {e}")
+        print(f" Failed on patient {pid}: {e}")
 
 df = pd.DataFrame(results)
 df.to_csv(output_csv, index=False)
-print(f"✅ Metrics written to: {output_csv}")
+print(f" Metrics written to: {output_csv}")
