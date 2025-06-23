@@ -24,7 +24,7 @@ IOU_LOG = "logs/ious_frcnn_resnet101_sca_per_frame.txt"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs("logs", exist_ok=True)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"🖥️ Using device: {device}")
+print(f" Using device: {device}")
 
 # === MODEL ===
 backbone = resnet_fpn_backbone("resnet101", weights=ResNet101_Weights.DEFAULT)
@@ -39,7 +39,7 @@ dataset = StenosisDataset(IMG_DIR, ANN_DIR, transforms=transform)
 loader = DataLoader(dataset, batch_size=1, shuffle=False, collate_fn=lambda x: tuple(zip(*x)))
 
 # === INFERENCE ===
-print("🔍 Running inference...")
+print(" Running inference...")
 frame_infos = []  # To track all frame metadata
 raw_detections_per_patient = defaultdict(list)
 gt_boxes_per_patient = defaultdict(list)
@@ -69,7 +69,7 @@ for idx, (images, targets) in tqdm(enumerate(loader), total=len(loader)):
     frame_infos.append((patient_id, img_filename))  # Save for later alignment
 
 # === APPLY SCA PER PATIENT ===
-print("🧠 Applying SCA per patient...")
+print(" Applying SCA per patient...")
 filtered_detections_all = {}
 gt_boxes_all = {}
 
@@ -95,15 +95,15 @@ for fname, det in zip(frames, filtered):  # one frame at a time for this patient
         # use previous box if available
         best_box = last_valid_box
         if best_box is not None:
-            print(f"ℹ️ Using last valid box for {fname}")
+            print(f" Using last valid box for {fname}")
         else:
-            print(f"⚠️ No box and no fallback available for {fname}")
+            print(f" No box and no fallback available for {fname}")
 
     out_path = os.path.join(OUTPUT_DIR, f"{fname}_boxes.npy")
     np.save(out_path, best_box)
 
 # === EVALUATE ===
-print("📊 Evaluating predictions...")
+print(" Evaluating predictions...")
 TP, FP, FN = 0, 0, 0
 ious = []
 
