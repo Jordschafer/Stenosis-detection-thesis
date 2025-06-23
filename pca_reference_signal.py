@@ -22,7 +22,7 @@ num_pixels = example.size[0] * example.size[1]
 frames = []
 for fname in frame_paths:
     img = Image.open(os.path.join(image_dir, fname)).convert("L")
-    img_resized = img.resize((300, 300))  # ⬅️ kies gewenste vaste resolutie
+    img_resized = img.resize((300, 300))  # kies gewenste vaste resolutie
     img_np = np.array(img_resized, dtype=np.float32).flatten() / 255.0
     frames.append(img_np)
 
