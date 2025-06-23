@@ -26,7 +26,7 @@ IOU_LOG = "logs/ious_frcnn_inceptionv3_sca_persist.txt"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs("logs", exist_ok=True)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"🖥️ Using device: {device}")
+print(f" Using device: {device}")
 
 # === MODEL ===
 inception = inception_v3(weights=Inception_V3_Weights.DEFAULT, aux_logits=True)
@@ -105,7 +105,7 @@ for idx, (images, targets) in tqdm(enumerate(loader), total=len(loader), desc="�
 filtered_detections_all = {}
 gt_boxes_all = {}
 
-for pid in tqdm(raw_detections_per_patient, desc="🧠 Applying SCA"):
+for pid in tqdm(raw_detections_per_patient, desc=" Applying SCA"):
     detections = raw_detections_per_patient[pid]
     filtered = apply_sequence_consistency_alignment(detections)
     frames = frame_names_per_patient[pid]
@@ -125,7 +125,7 @@ for pid in tqdm(raw_detections_per_patient, desc="🧠 Applying SCA"):
 
         if best_box is None and last_valid_box is not None:
             best_box = last_valid_box
-            print(f"ℹ️ {fname}: no prediction, reused last valid box")
+            print(f" {fname}: no prediction, reused last valid box")
 
         if best_box is not None:
             last_valid_box = best_box
