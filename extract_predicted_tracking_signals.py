@@ -15,10 +15,10 @@ def extract_tracking_signal(boxes_per_frame, frame_names):
     buffer = []
 
     for i, box in enumerate(boxes_per_frame):
-        print(f"\n📦 Frame {frame_names[i]}: loaded → {box}")
+        print(f"\n Frame {frame_names[i]}: loaded → {box}")
             
         if box is None:
-            print("   ⛔ Skipped: box is None")
+            print(" Skipped: box is None")
             centers.append([np.nan, np.nan])
             continue
 
@@ -29,11 +29,11 @@ def extract_tracking_signal(boxes_per_frame, frame_names):
                     xmin, ymin, xmax, ymax = box
                     cx = (xmin + xmax) / 2
                     cy = (ymin + ymax) / 2
-                    print(f"   ✅ Parsed box → center: ({cx:.2f}, {cy:.2f})")
+                    print(f" Parsed box → center: ({cx:.2f}, {cy:.2f})")
                     centers.append([cx, cy])
                     continue
             except Exception as e:
-                print(f"   ⚠️ Error parsing full box: {box} → {e}")
+                print(f" Error parsing full box: {box} → {e}")
                 centers.append([np.nan, np.nan])
                 continue
 
@@ -41,7 +41,7 @@ def extract_tracking_signal(boxes_per_frame, frame_names):
             xmin, ymin, xmax, ymax = box
             cx = (xmin + xmax) / 2
             cy = (ymin + ymax) / 2
-            print(f"   ✅ Parsed box → center: ({cx:.2f}, {cy:.2f})")
+            print(f" Parsed box → center: ({cx:.2f}, {cy:.2f})")
             centers.append([cx, cy])
 
         elif isinstance(box, (float, np.floating, int)):
@@ -51,14 +51,14 @@ def extract_tracking_signal(boxes_per_frame, frame_names):
                 cx = (xmin + xmax) / 2
                 cy = (ymin + ymax) / 2
                 centers.append([cx, cy])
-                print(f"   🔄 Reconstructed box → center: ({cx:.2f}, {cy:.2f})")
+                print(f" Reconstructed box → center: ({cx:.2f}, {cy:.2f})")
                 buffer.clear()
         else:
-            print(f"   ⚠️ Unrecognized format: {box}")
+            print(f" Unrecognized format: {box}")
             centers.append([np.nan, np.nan])
 
     if buffer:
-        print(f"   ⚠️ Leftover scalars: {buffer}")
+        print(f" Leftover scalars: {buffer}")
 
     centers = np.array(centers, dtype=np.float32)
 
@@ -109,15 +109,15 @@ for model in models:
                 boxes_per_frame.append(None)
                 frame_names.append(frame_file)
 
-        print(f"\n🔍 Extracting tracking signal for {model}/{pid} ({len(frame_names)} frames)")
+        print(f"\n Extracting tracking signal for {model}/{pid} ({len(frame_names)} frames)")
         signal = extract_tracking_signal(boxes_per_frame, frame_names)
 
-        print(f"\n📊 Signal summary for {pid}:")
-        print(f"   ➤ Length: {len(signal)}")
-        print(f"   ➤ NaNs: {np.count_nonzero(np.isnan(signal))}")
-        print(f"   ➤ Zeros: {np.count_nonzero(signal == 0.0)}")
-        print(f"   ➤ Min: {np.nanmin(signal)}, Max: {np.nanmax(signal)}")
+        print(f"\n Signal summary for {pid}:")
+        print(f" Length: {len(signal)}")
+        print(f" NaNs: {np.count_nonzero(np.isnan(signal))}")
+        print(f" Zeros: {np.count_nonzero(signal == 0.0)}")
+        print(f" Min: {np.nanmin(signal)}, Max: {np.nanmax(signal)}")
 
         out_path = os.path.join(model_output_dir, f"{pid}_tracking.npy")
         np.save(out_path, signal)
-        print(f"✅ Saved → {out_path}")
+        print(f" Saved → {out_path}")
