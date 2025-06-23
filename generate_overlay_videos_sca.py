@@ -118,7 +118,7 @@ def generate_overlay_video(model_name, model_fn):
             "labels": preds["labels"].to(DEVICE)
         })
 
-    print("🧠 Applying SCA...")
+    print(" Applying SCA...")
     filtered_detections = apply_sequence_consistency_alignment(
         raw_detections,
         t_iou=0.3,
@@ -151,7 +151,7 @@ def generate_overlay_video(model_name, model_fn):
         writer.write(frame)
 
     writer.release()
-    print(f"✅ Saved: {out_path}")
+    print(f" Saved: {out_path}")
 
 # === Run for all models
 if __name__ == "__main__":
