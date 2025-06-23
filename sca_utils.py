@@ -36,7 +36,7 @@ def apply_sequence_consistency_alignment(
     tracks = []
     used_detections_coords = set()
 
-    # 📦 First tqdm: Track building
+    # First tqdm: Track building
     for frame_idx in tqdm(range(num_total_frames), desc="SCA: Building Tracks"):
         current_frame = sequence_detections[frame_idx]
         for det_idx in range(current_frame['boxes'].shape[0]):
@@ -91,7 +91,7 @@ def apply_sequence_consistency_alignment(
     if debug:
         print(f"SCA built {len(tracks)} tracks.")
 
-    # 📦 Second tqdm: Interpolation
+    # Second tqdm: Interpolation
     interpolated_tracks = []
     for track in tqdm(tracks, desc="SCA: Interpolating Tracks"):
         track.sort(key=lambda x: x[0])
@@ -117,7 +117,7 @@ def apply_sequence_consistency_alignment(
 
         interpolated_tracks.append(interpolated)
 
-    # 🚧 Reconstruct sequence detections
+    # Reconstruct sequence detections
     output_sequence = []
     for f in range(num_total_frames):
         frame_boxes, frame_scores, frame_labels = [], [], []
