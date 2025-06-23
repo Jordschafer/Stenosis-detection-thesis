@@ -5,7 +5,7 @@ from scipy.signal import medfilt, detrend
 
 # === CONFIGURATION ===
 signal_dir = "logs/patient_signals"
-patient_id = "14_024_3"  # ⬅️ Set this to a valid patient ID
+patient_id = "14_024_3"  # Set this to a valid patient ID
 apply_median_filter = True
 filter_kernel_size = 5  # must be odd
 save_path = f"logs/{patient_id}_pca_vs_tracking.png"
@@ -54,4 +54,4 @@ plt.suptitle(f"Vergelijking ademhalingssignalen voor patiënt {patient_id}", fon
 plt.tight_layout(rect=[0, 0, 1, 0.96])
 plt.savefig(save_path, dpi=300)
 plt.show()
-print(f"✅ Visualisatie opgeslagen als: {save_path}")
+print(f" Visualisatie opgeslagen als: {save_path}")
