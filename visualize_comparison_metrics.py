@@ -64,4 +64,4 @@ plt.tight_layout()
 plt.savefig(os.path.join(output_dir, "bland_altman_freq.png"))
 plt.close()
 
-print(f"✅ Plots opgeslagen in: {output_dir}")
+print(f" Plots opgeslagen in: {output_dir}")
